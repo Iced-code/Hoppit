@@ -1,3 +1,4 @@
+!(game_pic.png)
 # Hoppit
 A Java-based game where you play as a frog catching flies.
 
