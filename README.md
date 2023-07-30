@@ -1,4 +1,4 @@
-![](game_pic.png)
+![](game_pic2.png)
 # Hoppit
 A Java-based game where you play as a frog catching flies.
 
