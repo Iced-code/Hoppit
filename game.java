@@ -14,7 +14,7 @@ public class game extends JPanel implements KeyListener
     boolean gameOver = false;
     int score = 0;
     int miss = 0;
-    int amount = 20;
+    int flyMoveAmount = 20;
     boolean paused = false;
     int highScore = 0;
     boolean isOpening = true;
@@ -40,7 +40,7 @@ public class game extends JPanel implements KeyListener
             if(Nut.life()){
                 miss++;
             }
-            amount = 20;
+            flyMoveAmount = 20;
             if(!paused){
                 Nut.aliveYes();
             }
@@ -52,7 +52,7 @@ public class game extends JPanel implements KeyListener
             if(Nut.life()){
                 miss++;
             }
-            amount = -20;
+            flyMoveAmount = -20;
             if(!paused){
                 Nut.aliveYes();
             }
@@ -116,8 +116,10 @@ public class game extends JPanel implements KeyListener
             Nut.aliveNo();
             paused = true;
             repaint();
-            String s = (JOptionPane.showInputDialog("Enter the egg")).toLowerCase();
-            
+            String s = "";
+            try {
+                s = (JOptionPane.showInputDialog("Enter the egg")).toLowerCase();
+            } catch (NullPointerException error){}
             /*Scanner sc = new Scanner(System.in);
 			System.out.println("Enter the egg: ");
 			String s = sc.nextLine();
@@ -294,13 +296,13 @@ public class game extends JPanel implements KeyListener
         /*gameOver = true;
         miss = 0;
         score = 0;*/
-        Nut.aliveYes();
+        //Nut.aliveYes();
         Leaf.show();
         while(miss < 4){
             try {
                 Thread.sleep(70);
             }catch(InterruptedException e) {}
-            Nut.move(amount);
+            Nut.move(flyMoveAmount);
             paintImmediately(0, 0, 1000, 1000);
             collide();
             end();
@@ -312,7 +314,7 @@ public class game extends JPanel implements KeyListener
         }
     }
 
-    public static void main(String [] arg){
+    /*public static void main(String [] arg){
 
         //makes the game window
         JFrame frame = new JFrame("Game");
@@ -333,5 +335,5 @@ public class game extends JPanel implements KeyListener
 
         frame.addKeyListener(game);
         game.run();
-    }
+    }*/
 }
