@@ -3,7 +3,7 @@
 A Java-based game where you play as a frog catching flies.
 
 ## Instructions
-Press the SPACEBAR to stick out the frog's tongue. Catch the fly as it flies by. Miss three flies? It's game over.
+Press the SPACEBAR to stick out the frog's tongue and Catch the fly as it flies by. Miss three flies? It's game over.
 Try your best to get a new high score!
 
 ## Downloading...
