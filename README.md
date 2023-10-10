@@ -1,6 +1,6 @@
 ![](game_pic2.png)
 # Hoppit
-A Java-based game where you play as a frog catching flies.
+A Java-based game where you play as a frog and catch flies.
 
 ## Instructions
 Press the SPACEBAR to stick out the frog's tongue and Catch the fly as it flies by. Miss three flies? It's game over.
