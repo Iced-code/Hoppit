@@ -1,9 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.JOptionPane; 
 import java.util.*;
-import java.util.Scanner;
 
 public class game extends JPanel implements KeyListener
 {
@@ -118,7 +116,7 @@ public class game extends JPanel implements KeyListener
             repaint();
             String s = "";
             try {
-                s = (JOptionPane.showInputDialog("Enter the egg")).toLowerCase();
+                s = (JOptionPane.showInputDialog("")).toLowerCase();
             } catch (NullPointerException error){}
             /*Scanner sc = new Scanner(System.in);
 			System.out.println("Enter the egg: ");
@@ -128,9 +126,11 @@ public class game extends JPanel implements KeyListener
 
 			//repaint();
             //paused = false;
-            if(s.equals("greatest treasure")){
+            if(s.equals("treasure")){
                 Leaf.sprig();
-                JOptionPane.showMessageDialog(null, "Never forget, the friends you make are the greatest of treasures.");
+                if(Leaf.getSprig() == true){
+                    JOptionPane.showMessageDialog(null, "Never forget, the friends you make are the greatest of treasures.");
+                }
             }
             
             paused = false;
@@ -173,6 +173,7 @@ public class game extends JPanel implements KeyListener
                 isOpening = false;
                 restart();
             }
+            
             Leaf.tongueOut();
             try {
                 Thread.sleep(220);
@@ -198,6 +199,13 @@ public class game extends JPanel implements KeyListener
                 Thread.sleep(400);
             }catch(InterruptedException x) {}
         }
+
+        if(c == 'i' || c == 'I'){
+            Nut.aliveNo();
+            isOpening = true;
+            paused = true;
+        }
+
         repaint();
     }
 
@@ -205,7 +213,6 @@ public class game extends JPanel implements KeyListener
 
 
     public void paint(Graphics g){
-        
         //paints background
         g.setColor(backgroundColor);
         g.fillRect(0, 0, 1000, 1000);
@@ -229,20 +236,30 @@ public class game extends JPanel implements KeyListener
         String name2 = "Github: @Iced-code";
 
         //instructions
-        String menu1 = "Welcome to Hoppit! In this game,"; 
+        /* String menu1 = "Welcome to Hoppit! In this game,"; 
         String menu2 = "you play as a frog trying to catch a fly.";
         String menu3 = "Press the SPACEBAR to stick out your tongue";
         String menu4 = "and catch the fly as it flies by.";
         String menu5 = "\nIf you miss the fly 3 times, it's game over!";
         String menu6 = "Try and get a high score!";
+        String menu7 = "Press the SPACEBAR to start"; */
+        String menu1 = "Welcome to Hoppit! In this game,"; 
+        String menu2 = "you play as a frog trying to catch";
+        String menu3 = "a fly. Press the SPACEBAR to stick";
+        String menu4 = "out your tongue and catch the fly";
+        String menu5 = "as it flies by. \nIf you miss the fly";
+        //String menu6 = "3 times, it's game over!\nTry and get a high score!";
+        String menu6 = "3 times, it's game over!";
         String menu7 = "Press the SPACEBAR to start";
 
         g.setColor(Color.BLACK);
         //paints name and @ at the bottom
-        g.setFont(new Font("Times New Roman", Font.BOLD, 17));
+        //g.setFont(new Font("Times New Roman", Font.BOLD, 17));
+        g.setFont(new Font("Verdana", Font.BOLD, 17));
         g.drawString(name1, 5, 737);
         g.drawString(name2, 5, 757);
-        g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+        //g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+        g.setFont(new Font("Verdana", Font.BOLD, 50));
         g.drawString(title, 20, 60);
 
 		//displays opening screen (instructions)
@@ -250,37 +267,44 @@ public class game extends JPanel implements KeyListener
             g.setColor(Color.WHITE);
             g.fillRect(100, 100, 600, 600);
             g.setColor(Color.BLACK);
-            g.setFont(new Font("Times New Roman", Font.BOLD, 30));
-			
-			g.drawString(menu1, 105, 200);
-            g.drawString(menu2, 105, 250);
-            g.drawString(menu3, 105, 300);
-            g.drawString(menu4, 105, 350);
-            g.drawString(menu5, 105, 400);
-            g.drawString(menu6, 105, 450);
-            g.drawString(menu7, 200, 575);
+            //g.setFont(new Font("Times New Roman", Font.BOLD, 30));
+			g.setFont(new Font("Verdana", Font.BOLD, 30));
+
+			g.drawString(menu1, 110, 200);
+            g.drawString(menu2, 110, 250);
+            g.drawString(menu3, 110, 300);
+            g.drawString(menu4, 110, 350);
+            g.drawString(menu5, 110, 400);
+            g.drawString(menu6, 110, 450);
+            g.drawString(menu7, 150, 575);
+            //g.drawString(menu7, 200, 605);
         }
 
 		//displays main game HUD
         if(!gameOver){
-            g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+            //g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+            g.setFont(new Font("Verdana", Font.BOLD, 40));
             g.drawString(scoreText, 575, 60);
-            g.drawString(attempt, 310, 60);
-            g.setFont(new Font("Times New Roman", Font.BOLD, 25));
+            g.drawString(attempt, 285, 60);
+            //g.drawString(attempt, 310, 60);
+            //g.setFont(new Font("Times New Roman", Font.BOLD, 25));
+            g.setFont(new Font("Verdana", Font.BOLD, 25));
             g.drawString(highScoreText, 575, 110);
         }
 
         //paints game over screen
         if(gameOver && !isOpening){
             g.setColor(Color.RED);
-            g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+            //g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+            g.setFont(new Font("Verdana", Font.BOLD, 50));
             String gameEnd = "Game Over";
-            g.drawString(gameEnd, 275, 320);
+            g.drawString(gameEnd, 255, 320);
             g.setColor(Color.BLACK);
-            g.drawString(highScoreText, 250, 415);
-            g.setFont(new Font("Times New Roman", Font.PLAIN, 35));
+            g.drawString(highScoreText, 230, 415);
+            //g.setFont(new Font("Times New Roman", Font.PLAIN, 35));
+            g.setFont(new Font("Verdana", Font.PLAIN, 35));
             String r = "Press 'R' to restart";
-            g.drawString(r, 270, 465);
+            g.drawString(r, 250, 465);
         }
     }
         
