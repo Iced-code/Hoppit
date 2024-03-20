@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.Graphics;
 
 public class frog
 {
@@ -59,22 +58,31 @@ public class frog
         change = !change;
     }
 
+    public boolean getSprig(){
+        return change;
+    }
+
+    public void tongueAnimate(Graphics g){
+        for(int i = 0; i <= 70; i += 10){
+            try {
+                Thread.sleep(250);
+            }catch(InterruptedException x) {}
+            g.fillRect(x+125, y-550, 50, (i*10));
+            System.out.println(i + " " + i*10);
+        }
+    }
+
     public void paint(Graphics g){
         if(visible){
-            //TOUNGE
-            if (tongue ==  true){
+            //TONGUE
+            if (tongue == true){
                 g.setColor(Color.PINK);
-                if(change){ g.setColor(new Color(237, 241, 66));}
-                // try {
-                    // Thread.sleep(500);
-                // }catch(InterruptedException e) {}
-                // for(int i = 0; i < 100; i += 10){
-                    // g.fillRect(x+125, a-(i*5), 50, b+(i*5));
-                // } 
-                
+                if(change){ 
+                    g.setColor(new Color(237, 241, 66));
+                }
+
                 g.fillRect(x+125, y-550, 50, 700);
                 g.fillRect(x+100, y-525, 100, 80);
-                
             }
 
             //BODY
