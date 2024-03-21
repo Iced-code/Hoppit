@@ -200,11 +200,11 @@ public class game extends JPanel implements KeyListener
             }catch(InterruptedException x) {}
         }
 
-        if(c == 'i' || c == 'I'){
+        /*if(c == 'i' || c == 'I'){
             Nut.aliveNo();
             isOpening = true;
             paused = true;
-        }
+        }*/
 
         repaint();
     }
@@ -262,7 +262,19 @@ public class game extends JPanel implements KeyListener
         g.setFont(new Font("Verdana", Font.BOLD, 50));
         g.drawString(title, 20, 60);
 
-		//displays opening screen (instructions)
+		//displays main game HUD
+        if(!gameOver){
+            //g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+            g.setFont(new Font("Verdana", Font.BOLD, 40));
+            g.drawString(scoreText, 575, 60);
+            g.drawString(attempt, 285, 60);
+            //g.drawString(attempt, 310, 60);
+            //g.setFont(new Font("Times New Roman", Font.BOLD, 25));
+            g.setFont(new Font("Verdana", Font.BOLD, 25));
+            g.drawString(highScoreText, 575, 110);
+        }
+
+        //displays opening screen (instructions)
         if(isOpening){
             g.setColor(Color.WHITE);
             g.fillRect(100, 100, 600, 600);
@@ -278,18 +290,6 @@ public class game extends JPanel implements KeyListener
             g.drawString(menu6, 110, 450);
             g.drawString(menu7, 150, 575);
             //g.drawString(menu7, 200, 605);
-        }
-
-		//displays main game HUD
-        if(!gameOver){
-            //g.setFont(new Font("Times New Roman", Font.BOLD, 50));
-            g.setFont(new Font("Verdana", Font.BOLD, 40));
-            g.drawString(scoreText, 575, 60);
-            g.drawString(attempt, 285, 60);
-            //g.drawString(attempt, 310, 60);
-            //g.setFont(new Font("Times New Roman", Font.BOLD, 25));
-            g.setFont(new Font("Verdana", Font.BOLD, 25));
-            g.drawString(highScoreText, 575, 110);
         }
 
         //paints game over screen
