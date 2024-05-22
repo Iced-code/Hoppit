@@ -185,7 +185,7 @@ public class game extends JPanel implements KeyListener
                 Nut.aliveNo();
                 
                 if(Nut.getGoldStatus() == true){
-                    score += 3;
+                    score += 2;
                 } else{
                     score++;
                 }
@@ -266,12 +266,12 @@ public class game extends JPanel implements KeyListener
         if(!gameOver){
             //g.setFont(new Font("Times New Roman", Font.BOLD, 50));
             g.setFont(new Font("Verdana", Font.BOLD, 40));
-            g.drawString(scoreText, 575, 60);
+            g.drawString(scoreText, 570, 60);
             g.drawString(attempt, 285, 60);
             //g.drawString(attempt, 310, 60);
             //g.setFont(new Font("Times New Roman", Font.BOLD, 25));
             g.setFont(new Font("Verdana", Font.BOLD, 25));
-            g.drawString(highScoreText, 575, 110);
+            g.drawString(highScoreText, 570, 110);
         }
 
         //displays opening screen (instructions)
