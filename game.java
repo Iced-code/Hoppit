@@ -35,10 +35,8 @@ public class game extends JPanel implements KeyListener
     }
 
     public void refillLives(){
-        if(lives.size() != 3){
-            lives.add(live1);
-            lives.add(live2);
-            lives.add(live3);
+        for(hearts life : lives){
+            life.show();
         }
     }
 
@@ -59,7 +57,7 @@ public class game extends JPanel implements KeyListener
         if(Nut.getX() <= -250){
             if(Nut.life()){
                 miss++;
-                lives.remove(lives.size() - 1);
+                lives.get(lives.size() - miss).hide();
             }
             flyMoveAmount = 20;
             if(!paused){
@@ -71,7 +69,7 @@ public class game extends JPanel implements KeyListener
         if(Nut.getX() + 140 >= 1150){
             if(Nut.life()){
                 miss++;
-                lives.remove(lives.size() - 1);
+                lives.get(lives.size() - miss).hide();
             }
             flyMoveAmount = -20;
             if(!paused){

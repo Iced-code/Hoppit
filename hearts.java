@@ -9,13 +9,16 @@ public class hearts
     private boolean visible = true;
     private boolean change = false;
     BufferedImage image = null;
+    BufferedImage image2 = null;
+    File input = null;
+    File input2 = null;
 
     public hearts(int x, int y){
         this.x = x;
         this.y = y;
         try {
-            File input = new File("images/lily.png");
-            image = ImageIO.read(input);
+            input = new File("images/lily.png");
+            input2 = new File("images/lily-dark.png");
         } catch (Exception e) {}
     } 
     
@@ -45,7 +48,15 @@ public class hearts
 
     public void paint(Graphics g){
         if(visible){
-            g.drawImage(image, x, y, null);
+            try {
+                image = ImageIO.read(input);
+            } catch (Exception e){}
+        } else {
+            try {
+                image = ImageIO.read(input2);
+            } catch (Exception e){}
         }
+
+        g.drawImage(image, x, y, null);
     }
 }
