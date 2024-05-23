@@ -3,8 +3,6 @@ import java.awt.Graphics;
 
 public class fly
 {
-    //private BufferedImage imageFace;
-    //private BufferedImage image1;
     private int x, y;
     private boolean alive;
     private boolean isGolden;
@@ -58,6 +56,7 @@ public class fly
         return isGolden;
     }
 
+    //BECOMES GOLD
     public void transform(){
         int x = (int)(Math.random() * 10);
         if(isGolden){
@@ -69,6 +68,8 @@ public class fly
     
     public void paint(Graphics g){
         if (alive ==  true){
+
+            //BODY
             if(!isGolden){
                 g.setColor(Color.GRAY);
             } else{
@@ -76,6 +77,7 @@ public class fly
             }
             g.fillRect(x, y, 85, 85);
 
+            //WINGS
             if(!isGolden){
                 g.setColor(Color.LIGHT_GRAY);
             } else{
@@ -84,14 +86,5 @@ public class fly
             g.fillRect(x+50, y-10, 90, 65);
             g.fillRect(x-50, y-10, 90, 65);
         }
-        // int a = y - 50;
-        // int b = 200;
-        // if (alive ==  true){
-            // g.setColor(Color.PINK);
-            // for(int i = 0; i < 100; i += 10){
-                // g.fillRect(x+125, a-(i*5), 50, b+(i*5));
-            // } 
-        // }
-        
     }
 }

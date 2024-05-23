@@ -2,8 +2,6 @@ import java.awt.*;
 
 public class frog
 {
-    //private BufferedImage imageFace;
-    //private BufferedImage image1;
     private int x, y;
     private boolean tongue = false;
     private boolean visible = true;
@@ -81,8 +79,10 @@ public class frog
                     g.setColor(new Color(237, 241, 66));
                 }
 
-                g.fillRect(x+125, y-550, 50, 700);
-                g.fillRect(x+100, y-525, 100, 80);
+                //g.fillRect(x+125, y-550, 50, 700);
+                g.fillRect(x+125, y-530, 50, 700);
+                //g.fillRect(x+100, y-505, 100, 80);
+                g.fillRect(x+100, y-505, 100, 80);
             }
 
             //BODY
