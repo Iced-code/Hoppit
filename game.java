@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -63,7 +64,9 @@ public class game extends JPanel implements KeyListener
                 miss++;
                 lives.get(lives.size() - miss).hide();
             }
-            flyMoveAmount = 20;
+            //flyMoveAmount = 20;
+            flyMoveAmount = (int)Math.random() * 30 + 30;
+
             if(!paused){
                 Nut.aliveYes();
             }
@@ -75,7 +78,9 @@ public class game extends JPanel implements KeyListener
                 miss++;
                 lives.get(lives.size() - miss).hide();
             }
-            flyMoveAmount = -20;
+            //flyMoveAmount = -20;
+            flyMoveAmount = -1*((int)Math.random() * 30 + 30);
+
             if(!paused){
                 Nut.aliveYes();
             }
@@ -238,7 +243,9 @@ public class game extends JPanel implements KeyListener
         public void run() {
             try {
                 Clip clip = AudioSystem.getClip();
-                AudioInputStream inputStream = AudioSystem.getAudioInputStream(game.class.getResourceAsStream("assets/audio/Amphibia_TrueColorsCredits.wav"));
+                String URL = "assets/audio/Amphibia_TrueColorsCredits.wav";
+                //AudioInputStream inputStream = AudioSystem.getAudioInputStream(game.class.getResourceAsStream("assets/audio/Amphibia_TrueColorsCredits.wav"));
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResource(URL));
                 clip.open(inputStream);
                 clip.start(); 
             } catch (Exception e) {
