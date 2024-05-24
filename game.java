@@ -1,5 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.util.*;
 
@@ -17,7 +21,7 @@ public class game extends JPanel implements KeyListener
     int highScore = 0;
     boolean isOpening = true;
 
-    String[] gems = {"images/green_gem.png", "images/blue_gem.png", "images/pink_gem.png"};
+    String[] gems = {"assets/images/green_gem.png", "assets/images/blue_gem.png", "assets/images/pink_gem.png"};
     ArrayList<hearts> lives = new ArrayList<hearts>();
     hearts live1 = new hearts(285, 7);
     hearts live2 = new hearts(365, 7);
@@ -111,10 +115,11 @@ public class game extends JPanel implements KeyListener
             } catch (NullPointerException error){}
 
             //SPRIG
-            if(s.equals("treasure")){
+            if(s.equals("sprig")){
                 Leaf.sprig();
                 if(Leaf.getSprig() == true){
                     JOptionPane.showMessageDialog(null, "Never forget, the friends you make are the greatest of treasures.");
+                    playSound();
                 }
             }
             //CALAMITY GEMS
@@ -122,7 +127,7 @@ public class game extends JPanel implements KeyListener
                 if(lives.get(0).getChange() == false){
                     int i = 0;
                     for(hearts life : lives){
-                        life.change_to_calamity(gems[i], "images/dark_gem.png");
+                        life.change_to_calamity(gems[i], "assets/images/dark_gem.png");
                         i++;
                     }
                 } 
@@ -231,6 +236,20 @@ public class game extends JPanel implements KeyListener
         }
     }
 
+    public static synchronized void playSound() {
+        new Thread(new Runnable() {
+        public void run() {
+            try {
+                Clip clip = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(game.class.getResourceAsStream("assets/audio/Amphibia_TrueColorsCredits.wav"));
+                clip.open(inputStream);
+                clip.start(); 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+          }
+        }).start();
+    }
     
     public void paint(Graphics g){
         //paints background
@@ -254,7 +273,7 @@ public class game extends JPanel implements KeyListener
         String highScoreText = "High Score: " + highScore;
         String scoreText = "Score: " + score;
         String title = "Hoppit";
-        String attempt = "Misses: " + miss;
+        //String attempt = "Misses: " + miss;
         String name1 = "Ayaan Modak";
         String name2 = "Github: @Iced-code";
 

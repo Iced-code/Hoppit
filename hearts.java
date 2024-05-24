@@ -16,8 +16,8 @@ public class hearts
         this.x = x;
         this.y = y;
         try {
-            lily = new File("images/lily2.png");
-            lily_dark = new File("images/lily2-dark.png");
+            lily = new File("assets/images/lily2.png");
+            lily_dark = new File("assets/images/lily2-dark.png");
         } catch (Exception e) {}
     } 
 
@@ -48,8 +48,8 @@ public class hearts
 
     public void change_to_lily(){
         try {
-            lily = new File("images/lily2.png");
-            lily_dark = new File("images/lily2-dark.png");
+            lily = new File("assets/images/lily2.png");
+            lily_dark = new File("assets/images/lily2-dark.png");
         } catch (Exception e) {}
         change = false;
     }
