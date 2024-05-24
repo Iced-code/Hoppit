@@ -7,7 +7,7 @@ Press the SPACEBAR to stick out the frog's tongue and Catch the fly as it flies 
 Try your best to get a new high score!
 
 ## Downloading...
-Download the zipp file, then run the Hoppit-game.jar file.
+Download the zip file, then run the Hoppit-game.jar file.
 
 
 ## Patch Notes
