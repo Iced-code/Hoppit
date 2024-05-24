@@ -9,7 +9,7 @@ public class Hoppit extends game
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setSize(800, 800);
-        frame.setLocation(0, 0);
+        frame.setLocation(250, 50);
         frame.setLayout(null);
 
         //makes the game

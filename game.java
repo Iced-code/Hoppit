@@ -21,14 +21,11 @@ public class game extends JPanel implements KeyListener
     int highScore = 0;
     boolean isOpening = true;
 
-    String[] gems = {"assets/images/green_gem.png", "assets/images/blue_gem.png", "assets/images/pink_gem.png"};
+    String[] gems = {"assets/images/green.png", "assets/images/blue.png", "assets/images/pink.png"};
     ArrayList<hearts> lives = new ArrayList<hearts>();
     hearts live1 = new hearts(285, 7);
     hearts live2 = new hearts(365, 7);
     hearts live3 = new hearts(445, 7);
-    /*hearts live1 = new hearts(285, 7, "images/green_gem.png", "images/dark_gem.png");
-    hearts live2 = new hearts(365, 7, "images/blue_gem.png", "images/dark_gem.png");
-    hearts live3 = new hearts(445, 7, "images/pink_gem.png", "images/dark_gem.png");*/
 
     public game(){
         gameOver = true;
@@ -98,48 +95,6 @@ public class game extends JPanel implements KeyListener
         }
         if(c == 'a' || c == 'A'){
             Leaf.moveLeft(35);        
-        } 
-
-        //ends game
-        if((c == 'r' || c == 'R') && !isOpening){
-            restart();  
-        }
-
-        if(c == 'S'){
-            Nut.aliveNo();
-            paused = true;
-            repaint();
-            String s = "";
-            try {
-                s = (JOptionPane.showInputDialog("")).toLowerCase();
-            } catch (NullPointerException error){}
-
-            //SPRIG
-            if(s.equals("sprig")){
-                Leaf.sprig();
-                if(Leaf.getSprig() == true){
-                    JOptionPane.showMessageDialog(null, "Never forget, the friends you make are the greatest of treasures.");
-                    playSound();
-                }
-            }
-            //CALAMITY GEMS
-            else if(s.equals("calamity")){
-                if(lives.get(0).getChange() == false){
-                    int i = 0;
-                    for(hearts life : lives){
-                        life.change_to_calamity(gems[i], "assets/images/dark_gem.png");
-                        i++;
-                    }
-                } 
-                else {
-                    for(hearts life : lives){
-                        life.change_to_lily();
-                    }
-                }
-            }
-            
-            paused = false;
-            repaint();
         }
 
         //Appears/Disappears fly
@@ -193,6 +148,48 @@ public class game extends JPanel implements KeyListener
             try {
                 Thread.sleep(400);
             }catch(InterruptedException x) {}
+        }
+
+        //ends game
+        if((c == 'r' || c == 'R') && !isOpening){
+            restart();  
+        }
+        
+        if(c == 'S'){
+            Nut.aliveNo();
+            paused = true;
+            repaint();
+            String s = "";
+            try {
+                s = (JOptionPane.showInputDialog("")).toLowerCase();
+            } catch (NullPointerException error){}
+
+            //SPRIG
+            if(s.equals("sprig")){
+                Leaf.sprig();
+                if(Leaf.getSprig() == true){
+                    JOptionPane.showMessageDialog(null, "Never forget, the friends you make are the greatest of treasures.");
+                    playSound();
+                }
+            }
+            //CALAMITY GEMS
+            else if(s.equals("calamity")){
+                if(lives.get(0).getChange() == false){
+                    int i = 0;
+                    for(hearts life : lives){
+                        life.change_to_calamity(gems[i], "assets/images/dark.png");
+                        i++;
+                    }
+                } 
+                else {
+                    for(hearts life : lives){
+                        life.change_to_lily();
+                    }
+                }
+            }
+            
+            paused = false;
+            repaint();
         }
 
         repaint();
