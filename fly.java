@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.Graphics;
 
 public class fly
 {
@@ -26,7 +25,7 @@ public class fly
     }
 
     public void moveHeight(){
-        y = (int)(Math.random() * 200) + 100;
+        y = (int)(Math.random() * 200) + 110;
     }
     
     public void aliveYes(){
@@ -71,7 +70,7 @@ public class fly
 
             //BODY
             if(!isGolden){
-                g.setColor(Color.GRAY);
+                g.setColor(new Color(57, 59, 63));
             } else{
                 g.setColor(new Color(252, 201, 61));
             }
@@ -79,7 +78,7 @@ public class fly
 
             //WINGS
             if(!isGolden){
-                g.setColor(Color.LIGHT_GRAY);
+                g.setColor(Color.GRAY);
             } else{
                 g.setColor(new Color(163, 132, 3));
             }

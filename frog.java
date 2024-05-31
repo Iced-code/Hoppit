@@ -78,11 +78,8 @@ public class frog
                 if(change){ 
                     g.setColor(new Color(237, 241, 66));
                 }
-
-                //g.fillRect(x+125, y-550, 50, 700);
-                g.fillRect(x+125, y-530, 50, 700);
-                //g.fillRect(x+100, y-505, 100, 80);
-                g.fillRect(x+100, y-505, 100, 80);
+                g.fillRect(x+125, y-520, 50, 700);
+                g.fillRect(x+100, y-495, 100, 80);
             }
 
             //BODY

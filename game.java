@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -10,10 +12,10 @@ import java.util.*;
 
 public class game extends JPanel implements KeyListener
 {
-    Color backgroundColor;
-
     frog Leaf;
     fly Nut;
+
+    Color backgroundColor;
     boolean gameOver = false;
     int score = 0;
     int miss = 0;
@@ -24,9 +26,14 @@ public class game extends JPanel implements KeyListener
 
     String[] gems = {"assets/images/green.png", "assets/images/blue.png", "assets/images/pink.png"};
     ArrayList<hearts> lives = new ArrayList<hearts>();
-    hearts live1 = new hearts(285, 7);
-    hearts live2 = new hearts(365, 7);
-    hearts live3 = new hearts(445, 7);
+    hearts live1 = new hearts(285, 10);
+    hearts live2 = new hearts(365, 10);
+    hearts live3 = new hearts(445, 10);
+    
+    File background;
+    BufferedImage backimage;
+    File instructions;
+    BufferedImage instructionsimage;
 
     public game(){
         gameOver = true;
@@ -37,6 +44,13 @@ public class game extends JPanel implements KeyListener
         lives.add(live1);
         lives.add(live2);
         lives.add(live3);
+
+        try {
+            background = new File("assets/images/background.png");
+            backimage = ImageIO.read(background);
+            instructions = new File("assets/images/instructions.png");
+            instructionsimage = ImageIO.read(instructions);
+        } catch (Exception e) {}
     }
 
     public void refillLives(){
@@ -173,7 +187,7 @@ public class game extends JPanel implements KeyListener
             if(s.equals("sprig")){
                 Leaf.sprig();
                 if(Leaf.getSprig() == true){
-                    JOptionPane.showMessageDialog(null, "Never forget, the friends you make are the greatest of treasures.");
+                    JOptionPane.showMessageDialog(this, "Sprig, the best frog friend - in this world, and every other world.");
                     playSound();
                 }
             }
@@ -185,6 +199,7 @@ public class game extends JPanel implements KeyListener
                         life.change_to_calamity(gems[i], "assets/images/dark.png");
                         i++;
                     }
+                    JOptionPane.showMessageDialog(this, "Gems of witt, heart, and strength can bring or stop calamity.");
                 } 
                 else {
                     for(hearts life : lives){
@@ -204,10 +219,6 @@ public class game extends JPanel implements KeyListener
 
     //plays the game
     public void run(){
-        /*gameOver = true;
-        miss = 0;
-        score = 0;*/
-        //Nut.aliveYes();
         Leaf.show();
         for(hearts life : lives){
             life.show();
@@ -257,16 +268,18 @@ public class game extends JPanel implements KeyListener
     
     public void paint(Graphics g){
         //paints background
-        g.setColor(backgroundColor);
+        /*g.setColor(backgroundColor);
         g.fillRect(0, 0, 1000, 1000);
 
         g.setColor(new Color(202, 255, 189));
         ((Graphics2D)g).setStroke(new BasicStroke(50));
         for(int y = 100; y <= 1800; y += 100){
             g.drawLine(0, y, 1000, y);
-        }
+        }*/
+
+        g.drawImage(backimage, 0, 0, null);
         
-        //paints fly and frog
+        //paints fly, frog, and lives
         Leaf.paint(g);
         Nut.paint(g);
         for(hearts life : lives){
@@ -277,18 +290,17 @@ public class game extends JPanel implements KeyListener
         String highScoreText = "High Score: " + highScore;
         String scoreText = "Score: " + score;
         String title = "Hoppit";
-        //String attempt = "Misses: " + miss;
         String name1 = "Ayaan Modak";
         String name2 = "Github: @Iced-code";
 
         //instructions
-        String menu1 = "Welcome to Hoppit! In this game,"; 
+        /*String menu1 = "Welcome to Hoppit! In this game,"; 
         String menu2 = "you play as a frog trying to catch";
         String menu3 = "a fly. Press the SPACEBAR to stick";
         String menu4 = "out your tongue and catch the fly";
         String menu5 = "as it flies by. \nIf you miss the fly";
         String menu6 = "3 times, it's game over!";
-        String menu7 = "Press the SPACEBAR to start";
+        String menu7 = "Press the SPACEBAR to start";*/
 
         
         //paints name and @ at the bottom
@@ -303,18 +315,20 @@ public class game extends JPanel implements KeyListener
 		//displays main game HUD
         if(!gameOver){
             g.setFont(new Font("Verdana", Font.BOLD, 40));
-            g.drawString(scoreText, 570, 60);
-            //g.drawString(attempt, 285, 60);
+            g.drawString(scoreText, 565, 55);
             g.setFont(new Font("Verdana", Font.BOLD, 25));
-            g.drawString(highScoreText, 570, 110);
+            g.drawString(highScoreText, 565, 100);
         }
 
         //displays opening screen (instructions)
         if(isOpening){
-            g.setColor(Color.WHITE);
+            g.drawImage(instructionsimage, 100, 100, null);
+            /*g.setColor(Color.WHITE);
             g.fillRect(100, 100, 600, 600);
             g.setColor(Color.BLACK);
 			g.setFont(new Font("Verdana", Font.BOLD, 30));
+
+            g.drawImage(logoimage, 100, 100, null);
 
 			g.drawString(menu1, 110, 200);
             g.drawString(menu2, 110, 250);
@@ -322,7 +336,7 @@ public class game extends JPanel implements KeyListener
             g.drawString(menu4, 110, 350);
             g.drawString(menu5, 110, 400);
             g.drawString(menu6, 110, 450);
-            g.drawString(menu7, 150, 575);
+            g.drawString(menu7, 150, 575);*/
         }
 
         //paints game over screen
