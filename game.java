@@ -207,6 +207,13 @@ public class game extends JPanel implements KeyListener
                     }
                 }
             }
+            //LEAF the Frog
+            else if(s.equals("leaf")){
+                Leaf.makeOriginal();
+                if(Leaf.getOriginal() == true){
+                    JOptionPane.showMessageDialog(this, "Leaf is the original and official nickname of the Hoppit Frog.");
+                }
+            }
             
             paused = false;
             repaint();
@@ -280,12 +287,18 @@ public class game extends JPanel implements KeyListener
         g.drawImage(backimage, 0, 0, null);
         
         //paints fly, frog, and lives
-        Leaf.paint(g);
-        Nut.paint(g);
-        for(hearts life : lives){
-            life.paint(g);
+        if(!isOpening){
+            Leaf.paint(g);
+            Nut.paint(g);
+            for(hearts life : lives){
+                life.paint(g);
+            }
         }
-        
+        if(gameOver){
+            Leaf.hide();
+            Nut.aliveNo();
+        }
+
         //words for the top and bottom
         String highScoreText = "High Score: " + highScore;
         String scoreText = "Score: " + score;
@@ -312,7 +325,7 @@ public class game extends JPanel implements KeyListener
         g.setFont(new Font("Verdana", Font.BOLD, 50));
         g.drawString(title, 20, 60);
 
-		//displays main game HUD
+		//displays game HUD
         if(!gameOver){
             g.setFont(new Font("Verdana", Font.BOLD, 40));
             g.drawString(scoreText, 565, 55);

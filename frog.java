@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class frog
 {
@@ -6,10 +9,19 @@ public class frog
     private boolean tongue = false;
     private boolean visible = true;
     private boolean change = false;
+    private boolean original = false;
+
+    private File file;
+    private BufferedImage image;
 
     public frog(int x, int y){
         this.x = x;
         this.y = y;
+
+        try {
+            file = new File("assets/images/frog.png");
+            image = ImageIO.read(file);
+        } catch (Exception e) {}
     } 
 
     public void moveRight(int distance){
@@ -52,12 +64,24 @@ public class frog
         visible = false;
     }
 
+    public boolean getVisible(){
+        return visible;
+    }
+
     public void sprig(){
         change = !change;
     }
 
     public boolean getSprig(){
         return change;
+    }
+
+    public void makeOriginal(){
+        original = !original;
+    }
+
+    public boolean getOriginal(){
+        return original;
     }
 
     public void tongueAnimate(Graphics g){
@@ -72,7 +96,7 @@ public class frog
 
     public void paint(Graphics g){
         if(visible){
-            //TONGUE
+            //tongue is always painted
             if (tongue == true){
                 g.setColor(Color.PINK);
                 if(change){ 
@@ -82,36 +106,64 @@ public class frog
                 g.fillRect(x+100, y-495, 100, 80);
             }
 
-            //BODY
-            g.setColor(new Color(66, 126, 245));
-            if(change){
-                g.setColor(new Color(240, 57, 119));
-            }
-            g.fillOval(x, y, 300, 300);
-            
-            //BELLY
-            g.setColor(new Color(227, 240, 255));
-            if(change){
-                g.setColor(new Color(249, 166, 187));
-            }
-            g.fillOval(x+25, y+75, 250, 450);
-            
-            //EYELIDS
-            g.setColor(new Color(0, 45, 102));
-            if(change){
-                g.setColor(new Color(249, 166, 187));
-            }
-            g.fillOval(x - 13, y-15, 90, 90);
-            g.fillOval(x + 215, y-15, 90, 90);
+            //frog sprite image
+            if(original == false){ 
+                
+                try {
+                    if(change == false){
+                        file = new File("assets/images/frog.png");
+                    }
+                    else {
+                        file = new File("assets/images/frog_sprig.png");
+                    }
+                    image = ImageIO.read(file);
+                } catch (Exception e){}
 
-            //EYES
-            g.setColor(new Color(205, 225, 250));
-            if(change){
-                g.setColor(new Color(255, 255, 227));
+                g.drawImage(image, 155, 520, null);
             }
-            g.fillOval(x-17, y-15, 85, 85);
-            g.fillOval(x+223, y-15, 85, 85);
-            g.setColor(Color.BLACK);
+            //original frog graphics image
+            else if(original == true){
+                //TONGUE
+                if (tongue == true){
+                    g.setColor(Color.PINK);
+                    if(change){ 
+                        g.setColor(new Color(237, 241, 66));
+                    }
+                    g.fillRect(x+125, y-520, 50, 700);
+                    g.fillRect(x+100, y-495, 100, 80);
+                }
+
+                //BODY
+                g.setColor(new Color(66, 126, 245));
+                if(change){
+                    g.setColor(new Color(240, 57, 119));
+                }
+                g.fillOval(x, y, 300, 300);
+                
+                //BELLY
+                g.setColor(new Color(227, 240, 255));
+                if(change){
+                    g.setColor(new Color(249, 166, 187));
+                }
+                g.fillOval(x+25, y+75, 250, 450);
+                
+                //EYELIDS
+                g.setColor(new Color(0, 45, 102));
+                if(change){
+                    g.setColor(new Color(249, 166, 187));
+                }
+                g.fillOval(x - 13, y-15, 90, 90);
+                g.fillOval(x + 215, y-15, 90, 90);
+
+                //EYES
+                g.setColor(new Color(205, 225, 250));
+                if(change){
+                    g.setColor(new Color(255, 255, 227));
+                }
+                g.fillOval(x-17, y-15, 85, 85);
+                g.fillOval(x+223, y-15, 85, 85);
+                g.setColor(Color.BLACK);
+            }
         }
     }
 }

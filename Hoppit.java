@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class Hoppit extends game
 {
-    public static void main(String [] arg){
+    public static void main(String[] arg){
 
         //makes the game window
         JFrame frame = new JFrame("Hoppit");
