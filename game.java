@@ -53,20 +53,12 @@ public class game extends JPanel implements KeyListener
         } catch (Exception e) {}
     }
 
-    public void refillLives(){
-        for(hearts life : lives){
-            life.show();
-        }
-    }
-
     public void restart(){
         gameOver = false;
         miss = 0;
         score = 0;
         Nut.setGoldStatus(false);
-        //Nut.aliveYes();
         Leaf.show();
-        refillLives();
         for(hearts life : lives){
             life.show();
         }
@@ -78,7 +70,6 @@ public class game extends JPanel implements KeyListener
                 miss++;
                 lives.get(lives.size() - miss).hide();
             }
-            //flyMoveAmount = 20;
             flyMoveAmount = (int)Math.random() * 30 + 30;
 
             if(!paused){
@@ -92,7 +83,6 @@ public class game extends JPanel implements KeyListener
                 miss++;
                 lives.get(lives.size() - miss).hide();
             }
-            //flyMoveAmount = -20;
             flyMoveAmount = -1*((int)Math.random() * 30 + 30);
 
             if(!paused){
@@ -109,20 +99,20 @@ public class game extends JPanel implements KeyListener
 
         
         //A & D for big movements
-        if(c == 'd' || c == 'D'){
+        /* if(c == 'd' || c == 'D'){
             Leaf.moveRight(35);        
         }
         if(c == 'a' || c == 'A'){
             Leaf.moveLeft(35);        
-        }
+        } */
 
         //Appears/Disappears fly
-        if(c == 'x' || c == 'X'){
+        /* if(c == 'x' || c == 'X'){
             Nut.aliveNo();        
         }
         if(c == 'z' || c == 'Z'){
             Nut.aliveYes();        
-        }
+        } */
 
         repaint();
     }
@@ -137,17 +127,18 @@ public class game extends JPanel implements KeyListener
         char c = e.getKeyChar();
         
         if(c == ' '){
+            if(!isOpening){
+                Leaf.tongueOut();
+                try {
+                    Thread.sleep(220);
+                }catch(InterruptedException x) {}
+                Leaf.tongueIn();
+            }
 
             if(isOpening){
                 isOpening = false;
                 restart();
             }
-            
-            Leaf.tongueOut();
-            try {
-                Thread.sleep(220);
-            }catch(InterruptedException x) {}
-            Leaf.tongueIn();
 
             //adds to score if fly is hit
             if((!(Leaf.getX() > Nut.getX() + 35) && !(Leaf.getX() + 185 < Nut.getX())) && Nut.life()){
