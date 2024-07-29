@@ -14,6 +14,7 @@ public class frog
     private File file;
     private BufferedImage image;
 
+    //CONSTRUCTOR
     public frog(int x, int y){
         this.x = x;
         this.y = y;
@@ -21,70 +22,79 @@ public class frog
         try {
             file = new File("assets/images/frog.png");
             image = ImageIO.read(file);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            System.err.println("Important files not found. Please manually restore the files or redownload the program files.");
+            System.exit(-1);
+        }
     } 
 
-    public void moveRight(int distance){
-        x = x + distance;
-    }
-
-    public void moveLeft(int distance){
-        x = x - distance;
-    }
-
+    //STICKS OUT FROG TONGUE
     public void tongueOut(){
         tongue = true;
     }
     
+    //STICKS IN FROG TONGUE
     public void tongueIn(){
         tongue = false;
     }
     
+    //RETURNS X POSTION
     public int getX(){
         return x;
     }
     
+    //RETURNS Y POSTION
     public int getY(){
         return y;
     }
     
+    //RETURNS TONGUE X POSITION
     public int getTongueX(){
         return x + 125;
     }
     
+    //RETURNS TONGUE Y POSITION
     public int getTongueY(){
         return y;
     }
 
+    //DISPLAYS FROG
     public void show(){
         visible = true;
     }
 
+    //HIDES FROG
     public void hide(){
         visible = false;
     }
 
+    //RETURNS VISIBLE ATTRIBUTE
     public boolean getVisible(){
         return visible;
     }
 
+    //FLIPS CHANGE ATTRIBUTE
     public void sprig(){
         change = !change;
     }
 
+    //RETURNS CHANGE ATTRIBUTE
     public boolean getSprig(){
         return change;
     }
 
+    //FLIPS ORIGINAL ATTRIBUTE
     public void makeOriginal(){
         original = !original;
     }
 
+    //RETURNS ORIGINAL ATTRIBUTE
     public boolean getOriginal(){
         return original;
     }
 
-    public void tongueAnimate(Graphics g){
+    //TONGUE ANIMATION TEST
+    /* public void tongueAnimate(Graphics g){
         for(int i = 0; i <= 70; i += 10){
             try {
                 Thread.sleep(250);
@@ -92,8 +102,9 @@ public class frog
             g.fillRect(x+125, y-550, 50, (i*10));
             System.out.println(i + " " + i*10);
         }
-    }
+    } */
 
+    //PAINTS FROG
     public void paint(Graphics g){
         if(visible){
             //tongue is always painted
@@ -117,7 +128,9 @@ public class frog
                         file = new File("assets/images/frog_sprig.png");
                     }
                     image = ImageIO.read(file);
-                } catch (Exception e){}
+                } catch (Exception e){
+                    System.err.println("Important files not found. Please manually restore the files or redownload the program files.");
+                }
 
                 g.drawImage(image, 155, 520, null);
             }

@@ -5,6 +5,8 @@ public class fly
     private int x, y;
     private boolean alive;
     private boolean isGolden;
+
+    //CONSTRUCTOR
     public fly(int x, int y){
         this.x = x;
         this.y = y;
@@ -12,45 +14,47 @@ public class fly
         isGolden = false;
     }
 
-    public void moveRight(int distance){
-        x = x + distance;
-    }
-
-    public void moveLeft(int distance){
-        x = x - distance;
-    }
-
+    //MOVES FLY
     public void move(int amount){
         x = x + amount;
     }
 
+    //CHANGES VERTICAL POSITION
     public void moveHeight(){
         y = (int)(Math.random() * 200) + 110;
     }
     
+    //SETS ALIVE ATTRIBUTE TO TRUE
     public void aliveYes(){
         alive = true;
     }
     
+    //SETS ALIVE ATTRIBUTE TO FALSE
     public void aliveNo(){
         alive = false;
     }
 
+    //RETURNS X POSITION
     public int getX(){
         return x;
     }
     
+    //RETURNS Y POSITION
     public int getY(){
         return y;
     }
     
+    //RETURNS ALIVE ATTRIBUTE
     public boolean life(){
         return alive;
     }
 
+    //SETS ISGOLDEN ATTRIBUTE BASED ON PARAMETER
     public void setGoldStatus(boolean isGold){
         isGolden = isGold;
     }
+
+    //RETURNS WHETHER OR NOT FLY IS GOLDEN
     public boolean getGoldStatus(){
         return isGolden;
     }
@@ -65,6 +69,7 @@ public class fly
         }
     }
     
+    //PAINTS FLY
     public void paint(Graphics g){
         if (alive ==  true){
 

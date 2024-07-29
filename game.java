@@ -35,6 +35,7 @@ public class game extends JPanel implements KeyListener
     File instructions;
     BufferedImage instructionsimage;
 
+    //CONSTRUCTOR
     public game(){
         gameOver = true;
         backgroundColor = new Color(243, 255, 240);
@@ -50,9 +51,13 @@ public class game extends JPanel implements KeyListener
             backimage = ImageIO.read(background);
             instructions = new File("assets/images/instructions.png");
             instructionsimage = ImageIO.read(instructions);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            System.err.println("Important files not found. Please manually restore the files or redownload the program files.");
+            System.exit(-1);
+        }
     }
 
+    //RESTART FUNCTION
     public void restart(){
         gameOver = false;
         miss = 0;
@@ -64,6 +69,7 @@ public class game extends JPanel implements KeyListener
         }
     }
 
+    //FLY'S RIGHT TO LEFT MOVEMENT AND OFFSCREEN COLLISION LOGIC
     public void collide(){
         if(Nut.getX() <= -250){
             if(Nut.life()){
@@ -94,38 +100,25 @@ public class game extends JPanel implements KeyListener
         repaint();
     }
 
+    //UNUSED
     public void keyPressed(KeyEvent e) {
         char c = e.getKeyChar();
-
-        
-        //A & D for big movements
-        /* if(c == 'd' || c == 'D'){
-            Leaf.moveRight(35);        
-        }
-        if(c == 'a' || c == 'A'){
-            Leaf.moveLeft(35);        
-        } */
-
-        //Appears/Disappears fly
-        /* if(c == 'x' || c == 'X'){
-            Nut.aliveNo();        
-        }
-        if(c == 'z' || c == 'Z'){
-            Nut.aliveYes();        
-        } */
 
         repaint();
     }
 
+    //UNUSED
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
 
         repaint();    
     }
 
+    //KEYBOARD INPUT FUNCTIONS
     public void keyReleased(KeyEvent e) {
         char c = e.getKeyChar();
         
+        //STICKS OUT TONGUE
         if(c == ' '){
             if(!isOpening){
                 Leaf.tongueOut();
@@ -140,7 +133,7 @@ public class game extends JPanel implements KeyListener
                 restart();
             }
 
-            //adds to score if fly is hit
+            //INCREASES SCORE IF FLY IS CAUGHT
             if((!(Leaf.getX() > Nut.getX() + 35) && !(Leaf.getX() + 185 < Nut.getX())) && Nut.life()){
                 Nut.aliveNo();
                 
@@ -160,11 +153,12 @@ public class game extends JPanel implements KeyListener
             }catch(InterruptedException x) {}
         }
 
-        //ends game
+        //RESTART
         if((c == 'r' || c == 'R') && !isOpening){
             restart();  
         }
         
+        //EASTER EGGS
         if(c == 'S'){
             Nut.aliveNo();
             paused = true;
@@ -198,7 +192,7 @@ public class game extends JPanel implements KeyListener
                     }
                 }
             }
-            //LEAF the Frog
+            //LEAF THE FROG
             else if(s.equals("leaf")){
                 Leaf.makeOriginal();
                 if(Leaf.getOriginal() == true){
@@ -207,7 +201,6 @@ public class game extends JPanel implements KeyListener
             }
             
             paused = false;
-            repaint();
         }
 
         repaint();
@@ -215,7 +208,7 @@ public class game extends JPanel implements KeyListener
 
     ////////////////////////////////////////////////////
 
-    //plays the game
+    //RUNS GAME LOGIC AND PLAYS THE GAME
     public void run(){
         Leaf.show();
         for(hearts life : lives){
@@ -240,44 +233,36 @@ public class game extends JPanel implements KeyListener
         }
     }
 
-    //ends the game
+    //ENDS THE GAME
     public void end(){
         if(miss >= 3){
             gameOver = true;
         }
     }
 
+    //PLAYS SOUND EFFECT
     public static synchronized void playSound() {
         new Thread(new Runnable() {
         public void run() {
             try {
                 Clip clip = AudioSystem.getClip();
                 String URL = "assets/audio/Amphibia_TrueColorsCredits.wav";
-                //AudioInputStream inputStream = AudioSystem.getAudioInputStream(game.class.getResourceAsStream("assets/audio/Amphibia_TrueColorsCredits.wav"));
                 AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResource(URL));
                 clip.open(inputStream);
                 clip.start(); 
             } catch (Exception e) {
+                System.err.println("Important files not found. Please manually restore the files or redownload the program files.");
                 e.printStackTrace();
             }
           }
         }).start();
     }
     
+    //DRAWS ALL OBJECTS ONTO SCREEN (FROG, FLY BACKGROUND, TEXT)
     public void paint(Graphics g){
-        //paints background
-        /*g.setColor(backgroundColor);
-        g.fillRect(0, 0, 1000, 1000);
-
-        g.setColor(new Color(202, 255, 189));
-        ((Graphics2D)g).setStroke(new BasicStroke(50));
-        for(int y = 100; y <= 1800; y += 100){
-            g.drawLine(0, y, 1000, y);
-        }*/
-
         g.drawImage(backimage, 0, 0, null);
         
-        //paints fly, frog, and lives
+        //PAINTS FROG, FLY, AND LIVES
         if(!isOpening){
             Leaf.paint(g);
             Nut.paint(g);
@@ -290,24 +275,14 @@ public class game extends JPanel implements KeyListener
             Nut.aliveNo();
         }
 
-        //words for the top and bottom
+        //TITLE, SCORE, AND NAME CREDITS
         String highScoreText = "High Score: " + highScore;
         String scoreText = "Score: " + score;
         String title = "Hoppit";
         String name1 = "Ayaan Modak";
         String name2 = "Github: @Iced-code";
 
-        //instructions
-        /*String menu1 = "Welcome to Hoppit! In this game,"; 
-        String menu2 = "you play as a frog trying to catch";
-        String menu3 = "a fly. Press the SPACEBAR to stick";
-        String menu4 = "out your tongue and catch the fly";
-        String menu5 = "as it flies by. \nIf you miss the fly";
-        String menu6 = "3 times, it's game over!";
-        String menu7 = "Press the SPACEBAR to start";*/
-
-        
-        //paints name and @ at the bottom
+        //PAINTS ON-SCREEN TEXT
         g.setColor(Color.BLACK);
         g.setFont(new Font("Verdana", Font.BOLD, 17));
         g.drawString(name1, 5, 737);
@@ -316,7 +291,7 @@ public class game extends JPanel implements KeyListener
         g.setFont(new Font("Verdana", Font.BOLD, 50));
         g.drawString(title, 20, 60);
 
-		//displays game HUD
+		//DISPLAYS GAME HUD
         if(!gameOver){
             g.setFont(new Font("Verdana", Font.BOLD, 40));
             g.drawString(scoreText, 565, 55);
@@ -324,31 +299,18 @@ public class game extends JPanel implements KeyListener
             g.drawString(highScoreText, 565, 100);
         }
 
-        //displays opening screen (instructions)
+        //DISPLAYS OPENING INSTRUCTIONS SCREEN
         if(isOpening){
             g.drawImage(instructionsimage, 100, 100, null);
-            /*g.setColor(Color.WHITE);
-            g.fillRect(100, 100, 600, 600);
-            g.setColor(Color.BLACK);
-			g.setFont(new Font("Verdana", Font.BOLD, 30));
-
-            g.drawImage(logoimage, 100, 100, null);
-
-			g.drawString(menu1, 110, 200);
-            g.drawString(menu2, 110, 250);
-            g.drawString(menu3, 110, 300);
-            g.drawString(menu4, 110, 350);
-            g.drawString(menu5, 110, 400);
-            g.drawString(menu6, 110, 450);
-            g.drawString(menu7, 150, 575);*/
         }
 
-        //paints game over screen
+        //PAINTS GAME OVER SCREEN
         if(gameOver && !isOpening){
             g.setColor(Color.RED);
             g.setFont(new Font("Verdana", Font.BOLD, 50));
             String gameEnd = "Game Over";
             g.drawString(gameEnd, 255, 320);
+
             g.setColor(Color.BLACK);
             g.drawString(highScoreText, 230, 415);
             g.setFont(new Font("Verdana", Font.PLAIN, 35));
