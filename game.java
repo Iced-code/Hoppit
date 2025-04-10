@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 import javax.swing.*;
 import java.util.*;
 
@@ -34,7 +36,7 @@ public class game extends JPanel implements KeyListener
     BufferedImage backimage;
     File instructions;
     BufferedImage instructionsimage;
-    static String errMessage = "Important files not found. Please manually restore or redownload the missing program files.";
+    private static String errMessage = "Important files not found. Please manually restore or redownload the missing program files.";
 
     //CONSTRUCTOR
     public game(){
@@ -122,7 +124,6 @@ public class game extends JPanel implements KeyListener
         //STICKS OUT TONGUE
         if(c == ' '){
             if(!isOpening){
-                playToungeSound();
                 Leaf.tongueOut();
                 try {
                     Thread.sleep(220);
@@ -137,6 +138,7 @@ public class game extends JPanel implements KeyListener
 
             //INCREASES SCORE IF FLY IS CAUGHT
             if((!(Leaf.getX() > Nut.getX() + 35) && !(Leaf.getX() + 185 < Nut.getX())) && Nut.life()){
+                playToungeSound();
                 Nut.aliveNo();
                 
                 if(Nut.getGoldStatus() == true){
@@ -250,7 +252,7 @@ public class game extends JPanel implements KeyListener
                 e.printStackTrace();
             }
           }
-        }).start();
+        }).start();      
     }
 
     //PLAYS TRUE COLORS SOUND EFFECT

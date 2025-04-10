@@ -11,6 +11,7 @@ public class hearts
     BufferedImage image = null;
     File lily = null;
     File lily_dark = null;
+    static String errMessage = "Important files not found. Please manually restore or redownload the missing program files.";
 
     //CONSTRUCTOR
     public hearts(int x, int y){
@@ -20,7 +21,7 @@ public class hearts
             lily = new File("assets/images/lily2.png");
             lily_dark = new File("assets/images/lily2-dark.png");
         } catch (Exception e) {
-            System.err.println("Important files not found. Please manually restore the files or redownload the program files.");
+            System.err.println(errMessage);
             System.exit(-1);
         }
     }
@@ -41,7 +42,7 @@ public class hearts
             lily = new File("assets/images/lily2.png");
             lily_dark = new File("assets/images/lily2-dark.png");
         } catch (Exception e) {
-            System.err.println("Important files not found. Please manually restore the files or redownload the program files.");
+            System.err.println(errMessage);
             System.exit(-1);
         }
         change = false;
@@ -53,7 +54,7 @@ public class hearts
             lily = new File(color_image);
             lily_dark = new File(dark_image);
         } catch (Exception e) {
-            System.err.println("Important files not found. Please manually restore the files or redownload the program files.");
+            System.err.println(errMessage);
         }
         change = true;
     }
