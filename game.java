@@ -34,6 +34,7 @@ public class game extends JPanel implements KeyListener
     BufferedImage backimage;
     File instructions;
     BufferedImage instructionsimage;
+    static String errMessage = "Important files not found. Please manually restore or redownload the missing program files.";
 
     //CONSTRUCTOR
     public game(){
@@ -52,7 +53,7 @@ public class game extends JPanel implements KeyListener
             instructions = new File("assets/images/instructions.png");
             instructionsimage = ImageIO.read(instructions);
         } catch (Exception e) {
-            System.err.println("Important files not found. Please manually restore the files or redownload the program files.");
+            System.err.println(errMessage);
             System.exit(-1);
         }
     }
@@ -121,6 +122,7 @@ public class game extends JPanel implements KeyListener
         //STICKS OUT TONGUE
         if(c == ' '){
             if(!isOpening){
+                playToungeSound();
                 Leaf.tongueOut();
                 try {
                     Thread.sleep(220);
@@ -173,7 +175,7 @@ public class game extends JPanel implements KeyListener
                 Leaf.sprig();
                 if(Leaf.getSprig() == true){
                     JOptionPane.showMessageDialog(this, "Sprig, the best frog friend - in this world, and every other world.");
-                    playSound();
+                    playTrueColorsSound();
                 }
             }
             //CALAMITY GEMS
@@ -233,15 +235,26 @@ public class game extends JPanel implements KeyListener
         }
     }
 
-    //ENDS THE GAME
-    public void end(){
-        if(miss >= 3){
-            gameOver = true;
-        }
+    //PLAYS TRUE COLORS SOUND EFFECT
+    public static synchronized void playToungeSound() {
+        new Thread(new Runnable() {
+        public void run() {
+            try {
+                Clip clip = AudioSystem.getClip();
+                String URL = "assets/audio/tongue_out.wav";
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResource(URL));
+                clip.open(inputStream);
+                clip.start(); 
+            } catch (Exception e) {
+                System.err.println(errMessage);
+                e.printStackTrace();
+            }
+          }
+        }).start();
     }
 
-    //PLAYS SOUND EFFECT
-    public static synchronized void playSound() {
+    //PLAYS TRUE COLORS SOUND EFFECT
+    public static synchronized void playTrueColorsSound() {
         new Thread(new Runnable() {
         public void run() {
             try {
@@ -251,13 +264,20 @@ public class game extends JPanel implements KeyListener
                 clip.open(inputStream);
                 clip.start(); 
             } catch (Exception e) {
-                System.err.println("Important files not found. Please manually restore the files or redownload the program files.");
+                System.err.println(errMessage);
                 e.printStackTrace();
             }
           }
         }).start();
     }
     
+    //ENDS THE GAME
+    public void end(){
+        if(miss >= 3){
+            gameOver = true;
+        }
+    }
+
     //DRAWS ALL OBJECTS ONTO SCREEN (FROG, FLY BACKGROUND, TEXT)
     public void paint(Graphics g){
         g.drawImage(backimage, 0, 0, null);
