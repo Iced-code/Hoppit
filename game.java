@@ -133,7 +133,12 @@ public class game extends JPanel implements KeyListener
 
             if(isOpening){
                 isOpening = false;
-                restart();
+                if(paused){
+                    paused = false;
+                }
+                else {
+                    restart();
+                }
             }
 
             //INCREASES SCORE IF FLY IS CAUGHT
@@ -158,7 +163,7 @@ public class game extends JPanel implements KeyListener
         }
 
         //RESTART
-        if((c == 'r' || c == 'R') && !isOpening){
+        else if((c == 'r' || c == 'R') && !isOpening){
             restart();  
         }
         
@@ -211,7 +216,6 @@ public class game extends JPanel implements KeyListener
                 Nut.aliveNo();
                 paused = true;
                 isOpening = true;
-                repaint();
             }
         }
 
@@ -322,11 +326,15 @@ public class game extends JPanel implements KeyListener
         g.drawString(title, 20, 60);
 
 		//DISPLAYS GAME HUD
-        if(!gameOver){
+        if(!gameOver && !paused){
             g.setFont(new Font("Verdana", Font.BOLD, 40));
             g.drawString(scoreText, 565, 55);
             g.setFont(new Font("Verdana", Font.BOLD, 25));
             g.drawString(highScoreText, 565, 100);
+        }
+        else if(!gameOver && paused){
+            g.setFont(new Font("Verdana", Font.BOLD, 40));
+            g.drawString("PAUSED", 565, 55);
         }
 
         //DISPLAYS OPENING INSTRUCTIONS SCREEN
