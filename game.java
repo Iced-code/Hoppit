@@ -68,6 +68,8 @@ public class game extends JPanel implements KeyListener
         for(hearts life : lives){
             life.show();
         }
+
+        paused = false;
     }
 
     //FLY'S RIGHT TO LEFT MOVEMENT AND OFFSCREEN COLLISION LOGIC
@@ -203,6 +205,14 @@ public class game extends JPanel implements KeyListener
             }
             
             paused = false;
+        }
+        else if(c == 'i' || c == 'I'){
+            if(!isOpening){
+                Nut.aliveNo();
+                paused = true;
+                isOpening = true;
+                repaint();
+            }
         }
 
         repaint();
