@@ -34,7 +34,7 @@ public class game extends JPanel implements KeyListener
     BufferedImage backimage;
     File instructions;
     BufferedImage instructionsimage;
-    private static String errMessage = "Important files not found. Please manually restore or redownload the missing program files.";
+    private static String errMessage = "[game.java] Important files not found. Please manually restore or redownload the missing program files.";
 
     //CONSTRUCTOR
     public game(){
@@ -54,6 +54,7 @@ public class game extends JPanel implements KeyListener
             instructionsimage = ImageIO.read(instructions);
         } catch (Exception e) {
             System.err.println(errMessage);
+            e.printStackTrace();
             System.exit(-1);
         }
     }
@@ -217,6 +218,10 @@ public class game extends JPanel implements KeyListener
                 paused = true;
                 isOpening = true;
             }
+        }
+
+        if(c == 'q' || c == 'Q'){
+            System.exit(0);
         }
 
         repaint();

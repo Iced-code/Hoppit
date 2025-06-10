@@ -11,7 +11,7 @@ public class hearts
     BufferedImage image = null;
     File lily = null;
     File lily_dark = null;
-    static String errMessage = "Important files not found. Please manually restore or redownload the missing program files.";
+    static String errMessage = "[hearts.java] Important files not found. Please manually restore or redownload the missing program files.";
 
     //CONSTRUCTOR
     public hearts(int x, int y){
@@ -22,6 +22,7 @@ public class hearts
             lily_dark = new File("assets/images/lily2-dark.png");
         } catch (Exception e) {
             System.err.println(errMessage);
+            e.printStackTrace();
             System.exit(-1);
         }
     }
@@ -43,6 +44,7 @@ public class hearts
             lily_dark = new File("assets/images/lily2-dark.png");
         } catch (Exception e) {
             System.err.println(errMessage);
+            e.printStackTrace();
             System.exit(-1);
         }
         change = false;
@@ -55,6 +57,7 @@ public class hearts
             lily_dark = new File(dark_image);
         } catch (Exception e) {
             System.err.println(errMessage);
+            e.printStackTrace();
         }
         change = true;
     }
@@ -66,14 +69,17 @@ public class hearts
 
     //PAINTS LIVES ICONS
     public void paint(Graphics g){
-        if(visible){
-            try {
+        try {
+            if(visible){
                 image = ImageIO.read(lily);
-            } catch (Exception e){}
-        } else {
-            try {
+            }
+            else {
                 image = ImageIO.read(lily_dark);
-            } catch (Exception e){}
+            }
+        } catch (Exception e){
+            System.err.println(errMessage);
+            e.printStackTrace();
+            System.exit(-1);
         }
 
         g.drawImage(image, x, y, null);

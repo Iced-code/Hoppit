@@ -13,7 +13,7 @@ public class frog
 
     private File file;
     private BufferedImage image;
-    private static String errMessage = "Important files not found. Please manually restore or redownload the missing program files.";
+    private static String errMessage = "[frog.java] Important files not found. Please manually restore or redownload the missing program files.";
 
     //CONSTRUCTOR
     public frog(int x, int y){
@@ -25,6 +25,7 @@ public class frog
             image = ImageIO.read(file);
         } catch (Exception e) {
             System.err.println(errMessage);
+            e.printStackTrace();
             System.exit(-1);
         }
     } 
@@ -131,6 +132,7 @@ public class frog
                     image = ImageIO.read(file);
                 } catch (Exception e){
                     System.err.println(errMessage);
+                    e.printStackTrace();
                 }
 
                 g.drawImage(image, 155, 520, null);
