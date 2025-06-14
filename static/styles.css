@@ -62,7 +62,6 @@ h1 {
   gap: 1.5rem;
 
   color: white;
-  /* text-shadow: 2px 3px black; */
 }
 
 .content #game_pic {
@@ -122,8 +121,12 @@ h1 {
   background-color: #003d80;
 }
 
-
-
+.arrow-button {
+  height: 24px;
+  width: 24px;
+  margin-left: 10px;
+  filter: invert()
+}
 
 /* Mobile responsiveness */
 @media (max-width: 600px) {
@@ -149,14 +152,27 @@ h1 {
 
   .github-button,
   .news-button {
-    width: 90%;
+    /* width: 90%; */
     justify-content: center;
     font-size: 1rem;
-    padding: 12px;
+    padding: 12px 14px;
+  }
+
+  .github-button {
+    padding: 12px 20px;
+  }
+
+  .news-button {
+    font-size: .8rem;
   }
 
   .github-logo {
     height: 20px;
     width: 20px;
+  }
+
+  .arrow-button {
+    height: 16px;
+    width: 16px;
   }
 }
