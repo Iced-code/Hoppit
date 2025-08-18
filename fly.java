@@ -1,6 +1,8 @@
 import java.awt.*;
 
-public class fly
+import javax.swing.JPanel;
+
+public class fly extends JPanel
 {
     private int x, y;
     private boolean alive;
@@ -70,7 +72,9 @@ public class fly
     }
     
     //PAINTS FLY
-    public void paint(Graphics g){
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+
         if (alive ==  true){
 
             //BODY

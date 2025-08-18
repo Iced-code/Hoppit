@@ -2,8 +2,10 @@ import java.awt.*;
 import java.io.File;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
-public class frog
+
+public class frog extends JPanel
 {
     private int x, y;
     private boolean tongue = false;
@@ -107,7 +109,9 @@ public class frog
     } */
 
     //PAINTS FROG
-    public void paint(Graphics g){
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+
         if(visible){
             //tongue is always painted
             if (tongue == true){

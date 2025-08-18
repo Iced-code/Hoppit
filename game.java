@@ -298,15 +298,17 @@ public class game extends JPanel implements KeyListener
     }
 
     //DRAWS ALL OBJECTS ONTO SCREEN (FROG, FLY BACKGROUND, TEXT)
-    public void paint(Graphics g){
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+
         g.drawImage(backimage, 0, 0, null);
         
         //PAINTS FROG, FLY, AND LIVES
         if(!isOpening){
-            Leaf.paint(g);
-            Nut.paint(g);
+            Leaf.paintComponent(g);
+            Nut.paintComponent(g);
             for(hearts life : lives){
-                life.paint(g);
+                life.paintComponent(g);
             }
         }
         if(gameOver){

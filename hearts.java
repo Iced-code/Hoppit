@@ -3,7 +3,9 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.ImageIO;
 
-public class hearts
+import javax.swing.JPanel;
+
+public class hearts extends JPanel
 {
     private int x, y;
     private boolean visible = true;
@@ -68,7 +70,9 @@ public class hearts
     }
 
     //PAINTS LIVES ICONS
-    public void paint(Graphics g){
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+
         try {
             if(visible){
                 image = ImageIO.read(lily);
