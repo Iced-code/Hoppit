@@ -5,7 +5,7 @@ import javax.imageio.ImageIO;
 
 import javax.swing.JPanel;
 
-public class hearts extends JPanel
+public class heart extends JPanel
 {
     private int x, y;
     private boolean visible = true;
@@ -16,7 +16,7 @@ public class hearts extends JPanel
     static String errMessage = "[hearts.java] Important files not found. Please manually restore or redownload the missing program files.";
 
     //CONSTRUCTOR
-    public hearts(int x, int y){
+    public heart(int x, int y){
         this.x = x;
         this.y = y;
         try {

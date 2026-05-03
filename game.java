@@ -15,7 +15,6 @@ public class game extends JPanel implements KeyListener
     frog Leaf;
     fly Nut;
 
-    Color backgroundColor;
     boolean gameOver = false;
     int score = 0;
     int miss = 0;
@@ -25,10 +24,10 @@ public class game extends JPanel implements KeyListener
     boolean isOpening = true;
 
     String[] gems = {"assets/images/green.png", "assets/images/blue.png", "assets/images/pink.png"};
-    ArrayList<hearts> lives = new ArrayList<hearts>();
-    hearts live1 = new hearts(285, 10);
-    hearts live2 = new hearts(365, 10);
-    hearts live3 = new hearts(445, 10);
+    ArrayList<heart> lives = new ArrayList<heart>();
+    heart live1 = new heart(285, 10);
+    heart live2 = new heart(365, 10);
+    heart live3 = new heart(445, 10);
     
     File background;
     BufferedImage backimage;
@@ -39,7 +38,6 @@ public class game extends JPanel implements KeyListener
     //CONSTRUCTOR
     public game(){
         gameOver = true;
-        backgroundColor = new Color(243, 255, 240);
         Leaf = new frog(250, 600);
         Nut = new fly((int)Math.random() * 800, 200);
         
@@ -66,7 +64,7 @@ public class game extends JPanel implements KeyListener
         score = 0;
         Nut.setGoldStatus(false);
         Leaf.show();
-        for(hearts life : lives){
+        for(heart life : lives){
             life.show();
         }
 
@@ -190,14 +188,14 @@ public class game extends JPanel implements KeyListener
             else if(s.equals("calamity")){
                 if(lives.get(0).getChange() == false){
                     int i = 0;
-                    for(hearts life : lives){
+                    for(heart life : lives){
                         life.change_to_calamity(gems[i], "assets/images/dark.png");
                         i++;
                     }
                     JOptionPane.showMessageDialog(this, "Gems of witt, heart, and strength can bring or stop calamity.");
                 } 
                 else {
-                    for(hearts life : lives){
+                    for(heart life : lives){
                         life.change_to_lily();
                     }
                 }
@@ -232,7 +230,7 @@ public class game extends JPanel implements KeyListener
     //RUNS GAME LOGIC AND PLAYS THE GAME
     public void run(){
         Leaf.show();
-        for(hearts life : lives){
+        for(heart life : lives){
             life.show();
         }
         while(miss < 4){
@@ -246,7 +244,7 @@ public class game extends JPanel implements KeyListener
             if(gameOver){
                 Nut.aliveNo();
                 Leaf.hide();
-                for(hearts life : lives){
+                for(heart life : lives){
                     life.hide();
                 }
             }
@@ -307,7 +305,7 @@ public class game extends JPanel implements KeyListener
         if(!isOpening){
             Leaf.paintComponent(g);
             Nut.paintComponent(g);
-            for(hearts life : lives){
+            for(heart life : lives){
                 life.paintComponent(g);
             }
         }
